@@ -17,7 +17,8 @@ public class Dependencia {
         
         Documento d1 = new Documento("El salido", "Hola");
         
-        System.out.println(d1);
+        il.imprimir(d1);
+
         
     }
     

@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.Televesion;
+package television;
 
+/**
+ *
+ * @author SALON202
+ */
 public class Television {
 
     public static void main(String[] args) {
@@ -16,8 +20,7 @@ public class Television {
         tv.avanzarCanal();
         tv.mute();
         tv.cambiarCanal(2); 
+                System.out.println(tv);
 
-        System.out.println(tv);
     }
 }
-

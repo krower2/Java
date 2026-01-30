@@ -23,7 +23,7 @@ public class Operaciones {
         System.out.print("Ingrese denominador 1: ");
         float d1 = teclado.nextFloat();
 
-        Fracción f1 = new Fracción(n1, d1);
+        Fraccion f1 = new Fraccion(n1, d1);
 
         System.out.print("Ingrese numerador 2: ");
         float n2 = teclado.nextFloat();
@@ -31,10 +31,8 @@ public class Operaciones {
         System.out.print("Ingrese denominador 2: ");
         float d2 = teclado.nextFloat();
 
-        Fracción f2 = new Fracción(n2, d2);
-
-        Fracción suma = f1.sumar(f2);
-
-        System.out.println("Resultado: " + suma);
+        Fraccion f2 = new Fraccion(n2, d2);
+        
+        System.out.println(f1.operacionesCon(f2));
     }
 }

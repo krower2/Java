@@ -6,7 +6,7 @@ public class Fechas {
     private int mes;
     private int año;
 
-    // Constructor predeterminado (1-1-1900)
+   
     public Fechas() {
         dia = 1;
         mes = 1;
@@ -21,7 +21,7 @@ public class Fechas {
         valida();
     }
 
-    // Validar fecha básica
+    
     private void valida() {
         if (año < 1900 || año > 2050) {
             año = 1900;
@@ -34,12 +34,12 @@ public class Fechas {
         }
     }
 
-    // Saber si el año es bisiesto
+   
     public boolean esBisiesto() {
         return (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
     }
 
-    // Días que tiene el mes actual
+   
     public int diasMes() {
         switch (mes) {
             case 2: return esBisiesto() ? 29 : 28;
@@ -48,12 +48,12 @@ public class Fechas {
         }
     }
 
-    // Mostrar fecha en formato dd-mm-aaaa
+    
     public String corta() {
         return String.format("%02d-%02d-%d", dia, mes, año);
     }
 
-    // Avanza al siguiente día
+    
     public void siguiente() {
         dia++;
         if (dia > diasMes()) {
@@ -66,7 +66,7 @@ public class Fechas {
         }
     }
 
-    // Retrocede al día anterior
+    
     public void anterior() {
         dia--;
         if (dia < 1) {
@@ -79,7 +79,7 @@ public class Fechas {
         }
     }
 
-    // Getters y setters básicos
+    
     public int getDia() { return dia; }
     public int getMes() { return mes; }
     public int getAño() { return año; }

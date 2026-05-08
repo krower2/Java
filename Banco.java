@@ -3,104 +3,148 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package banco;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 public class Banco {
+    
+public static void main(String[] args) {
 
-    public static void main(String[] args) {
+    Cuenta cuenta = new Cuenta();
 
-        Scanner sc = new Scanner(System.in);
-        Cuenta cuenta = new Cuenta();
+    BancoIO.leerArchivo("cuentas.txt", cuenta);
 
-        BancoIO.leerArchivo("cuentas.txt", cuenta);
+    while (true) {
 
-        while (true) {
+        String op = JOptionPane.showInputDialog(
+                "=== SISTEMA BANCARIO ===\n"
+                + "1. Agregar cuenta\n"
+                + "2. Depositar dinero\n"
+                + "3. Retirar dinero\n"
+                + "4. Mostrar cuentas\n"
+                + "5. Salir\n\n"
+                + "Seleccione una opción:"
+        );
 
-            System.out.println("\n==============================");
-            System.out.println("      SISTEMA BANCARIO");
-            System.out.println("==============================");
-            System.out.println("1. Agregar cuenta");
-            System.out.println("2. Depositar dinero");
-            System.out.println("3. Retirar dinero");
-            System.out.println("4. Mostrar cuentas");
-            System.out.println("5. Salir");
-            System.out.println("==============================");
-            System.out.print("Seleccione una opción: ");
+        try {
 
-            String op = sc.nextLine();
+            switch (op) {
 
-            try {
+                case "1":
 
-                switch (op) {
+                    String num = JOptionPane.showInputDialog(
+                            "Número de cuenta:"
+                    );
 
-                    case "1":
-                        System.out.println("\n--- AGREGAR CUENTA ---");
+                    String nom = JOptionPane.showInputDialog(
+                            "Nombre del titular:"
+                    );
 
-                        System.out.print("Número de cuenta: ");
-                        String num = sc.nextLine();
+                    double saldo = Double.parseDouble(
+                            JOptionPane.showInputDialog(
+                                    "Saldo inicial:"
+                            )
+                    );
 
-                        System.out.print("Nombre del titular: ");
-                        String nom = sc.nextLine();
+                    cuenta.agregarCuenta(
+                            new CuentaBancaria(num, nom, saldo)
+                    );
 
-                        System.out.print("Saldo inicial: ");
-                        double saldo = Double.parseDouble(sc.nextLine());
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Cuenta agregada correctamente"
+                    );
 
-                        cuenta.agregarCuenta(new CuentaBancaria(num, nom, saldo));
+                    break;
 
-                        System.out.println("✔ Cuenta agregada correctamente");
-                        break;
+                case "2":
 
-                    case "2":
-                        System.out.println("\n--- DEPÓSITO ---");
+                    num = JOptionPane.showInputDialog(
+                            "Número de cuenta:"
+                    );
 
-                        System.out.print("Número de cuenta: ");
-                        num = sc.nextLine();
+                    double dep = Double.parseDouble(
+                            JOptionPane.showInputDialog(
+                                    "Monto a depositar:"
+                            )
+                    );
 
-                        System.out.print("Monto a depositar: ");
-                        double dep = Double.parseDouble(sc.nextLine());
+                    cuenta.buscar(num).depositar(dep);
 
-                        cuenta.buscar(num).depositar(dep);
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Depósito realizado"
+                    );
 
-                        System.out.println("✔ Depósito realizado");
-                        break;
+                    break;
 
-                    case "3":
-                        System.out.println("\n--- RETIRO ---");
+                case "3":
 
-                        System.out.print("Número de cuenta: ");
-                        num = sc.nextLine();
+                    num = JOptionPane.showInputDialog(
+                            "Número de cuenta:"
+                    );
 
-                        System.out.print("Monto a retirar: ");
-                        double ret = Double.parseDouble(sc.nextLine());
+                    double ret = Double.parseDouble(
+                            JOptionPane.showInputDialog(
+                                    "Monto a retirar:"
+                            )
+                    );
 
-                        cuenta.buscar(num).retirar(ret);
+                    cuenta.buscar(num).retirar(ret);
 
-                        System.out.println("✔ Retiro realizado");
-                        break;
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Retiro realizado"
+                    );
 
-                    case "4":
-                        System.out.println("\n--- LISTA DE CUENTAS ---");
+                    break;
 
-                        for (CuentaBancaria c : cuenta.getCuentas()) {
-                            System.out.println("• " + c);
-                        }
+                case "4":
 
-                        break;
+                    String lista = "";
 
-                    case "5":
-                        BancoIO.escribirArchivo("cuentas.txt", cuenta);
-                        System.out.println("\n✔ Datos guardados correctamente");
-                        System.out.println("Saliendo del sistema...");
-                        sc.close();
-                        System.exit(0);
-                        break;
+                    for (CuentaBancaria c : cuenta.getCuentas()) {
 
-                    default:
-                        System.out.println("⚠ Opción no válida");
-                }
+                        lista += c + "\n";
+                    }
 
-            } catch (Exception e) {
-                System.out.println("❌ Error: " + e.getMessage());
+                    JOptionPane.showMessageDialog(
+                            null,
+                            lista
+                    );
+
+                    break;
+
+                case "5":
+
+                    BancoIO.escribirArchivo(
+                            "cuentas.txt",
+                            cuenta
+                    );
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Datos guardados"
+                    );
+
+                    System.exit(0);
+
+                    break;
+
+                default:
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Opción no válida"
+                    );
             }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Error: " + e.getMessage()
+            );
         }
     }
+}
 }

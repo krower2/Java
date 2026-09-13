@@ -23,6 +23,9 @@ public class Nodo{
     public void setSig(Nodo sig) {
         this.sig = sig;
     }
-    
+
+    public void setDato(int dato) {
+    this.dato = dato;
+    }
     
 }
